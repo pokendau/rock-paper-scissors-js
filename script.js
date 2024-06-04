@@ -13,52 +13,26 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
   const formated = humanChoice.toLowerCase();
-  switch (formated) {
-    case "rock":
-      checkRock(computerChoice);
-      break;
-    case "paper":
-      checkPaper(computerChoice);
-      break;
-    case "scissors":
-      checkScissors(computerChoice);
-      break;
-  }
-}
-
-function checkRock(computerChoice) {
-  if (computerChoice == "rock") {
-    console.log("It is a draw");
-  } else if (computerChoice == "paper") {
-    console.log("You lose! Paper beats Rock.");
-    computerScore++;
-  } else {
-    console.log("You win! Rock beats Scissors.");
-    humanScore++;
-  }
-}
-
-function checkPaper(computerChoice) {
-  if (computerChoice == "scissors") {
-    console.log("You lose! Scissors beat Paper.");
-    computerScore++;
-  } else if (computerChoice == "rock") {
-    console.log("You win! Paper beats Rock.");
+  if (formated == computerChoice) {
+    console.log("It is a tie");
+  } else if (
+    (formated == "rock" && computerChoice == "scissors") ||
+    (formated == "paper" && computerChoice == "rock") ||
+    (formated == "scissors" && computerChoice == "paper")
+  ) {
+    console.log(
+      `You win! ${formated.charAt(0).toUpperCase() + formated.slice(1)} beats ${
+        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
+      }`
+    );
     humanScore++;
   } else {
-    console.log("It is a draw");
-  }
-}
-
-function checkScissors(computerChoice) {
-  if (computerChoice == "paper") {
-    console.log("You win! Scissors beat Paper.");
-    humanScore++;
-  } else if (computerChoice == "rock") {
-    console.log("You lose! Rock beats Scissors.");
+    console.log(
+      `You lose! ${
+        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
+      } beats ${formated.charAt(0).toUpperCase() + formated.slice(1)}`
+    );
     computerScore++;
-  } else {
-    console.log("It is a draw");
   }
 }
 
@@ -70,6 +44,7 @@ function playGame() {
       } Human Score is ${humanScore} and computer score is ${computerScore}`
     );
     const computerChoice = getComputerChoice();
+    // console.log("Computer choice for testing is " + computerChoice);
     const humanChoice = getHumanChoice();
     playRound(humanChoice, computerChoice);
   }
