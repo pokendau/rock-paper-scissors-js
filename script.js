@@ -35,22 +35,3 @@ function playRound(humanChoice, computerChoice) {
     computerScore++;
   }
 }
-
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    console.log(
-      `Round ${
-        i + 1
-      } Human Score is ${humanScore} and computer score is ${computerScore}`
-    );
-    const computerChoice = getComputerChoice();
-    // console.log("Computer choice for testing is " + computerChoice);
-    const humanChoice = getHumanChoice();
-    playRound(humanChoice, computerChoice);
-  }
-  console.log(
-    `The score is: ${humanScore} for the human and ${computerScore} for the computer`
-  );
-}
-
-playGame();

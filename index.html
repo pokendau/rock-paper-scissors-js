@@ -7,6 +7,35 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="gameboy">
+      <div id="screen">
+        <div id="screen__main">
+          <div id="screen__text">
+            Score 5 Points to Win
+            <img id="trophy_image" src="/images/trophy.png" alt="" />
+          </div>
+          <div id="boxes">
+            <div class="box">
+              <div id="player">
+                <img src="images/fist.png" alt="" />
+              </div>
+              <p>Player: <span id="player__score">0</span></p>
+            </div>
+            <div class="box">
+              <div id="computer">
+                <img src="images/fist.png" alt="" />
+              </div>
+              <p>Computer: <span id="computer__score">0</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="gameboy__body">
+        <button>✂️</button>
+        <button>📜</button>
+        <button>🪨</button>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
