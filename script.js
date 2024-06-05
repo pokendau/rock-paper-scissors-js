@@ -7,42 +7,11 @@ const paperBtn = document.getElementById("paper_btn");
 const player = document.getElementById("player");
 const computer = document.getElementById("computer");
 
-console.log(`${player}, ${computer}`);
-
 let humanScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
   return choices[Math.floor(Math.random() * choices.length)];
-}
-
-function getHumanChoice() {
-  return prompt("give a value");
-}
-
-function playRound(humanChoice, computerChoice) {
-  const formated = humanChoice.toLowerCase();
-  if (formated == computerChoice) {
-    console.log("It is a tie");
-  } else if (
-    (formated == "rock" && computerChoice == "scissors") ||
-    (formated == "paper" && computerChoice == "rock") ||
-    (formated == "scissors" && computerChoice == "paper")
-  ) {
-    console.log(
-      `You win! ${formated.charAt(0).toUpperCase() + formated.slice(1)} beats ${
-        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
-      }`
-    );
-    humanScore++;
-  } else {
-    console.log(
-      `You lose! ${
-        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
-      } beats ${formated.charAt(0).toUpperCase() + formated.slice(1)}`
-    );
-    computerScore++;
-  }
 }
 
 scissorBtn.addEventListener("click", (ev) => {
@@ -94,9 +63,17 @@ function toggleClass(element, className) {
 
 function checkWinner(playerChoice, computerChoice) {
   const txt = document.getElementById("screen__text");
+  const body = document.querySelector("body");
+  body.classList.remove(
+    "default_gradient",
+    "winning_gradient",
+    "losing_gradient"
+  );
+
   if (playerChoice == computerChoice) {
     txt.innerHTML = "It is a tie 🫤";
     txt.style.color = "yellow";
+    body.classList.add("default_gradient");
   } else if (
     (playerChoice == "rock" && computerChoice == "scissors") ||
     (playerChoice == "paper" && computerChoice == "rock") ||
@@ -105,15 +82,36 @@ function checkWinner(playerChoice, computerChoice) {
     humanScore++;
     txt.innerHTML = "You won 🥳";
     txt.style.color = "limegreen";
+    body.classList.add("winning_gradient");
   } else {
     computerScore++;
     txt.innerHTML = "Computer won 😤";
     txt.style.color = "red";
+    body.classList.add("losing_gradient");
   }
   changeScore();
+  checkEnd();
 }
 
 function changeScore() {
   document.getElementById("player__score").innerHTML = humanScore;
   document.getElementById("computer__score").innerHTML = computerScore;
+}
+
+function checkEnd() {
+  if (humanScore == 5 || computerScore == 5) {
+    console.log("we have a winner");
+    confetti({
+      particleCount: 1000,
+      angle: 90,
+      spread: 180,
+      ticks: 300,
+      shapes: ["circle", "square", "star"],
+    });
+    document.getElementById("screen__main").innerHTML = "WE have a winner!";
+    document.getElementById("screen__main").classList.add("screen__main_final");
+    rockBtn.disabled = true;
+    scissorBtn.disabled = true;
+    paperBtn.disabled = true;
+  }
 }

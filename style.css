@@ -8,6 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 #gameboy {
@@ -23,8 +24,23 @@ body {
     border-top-right-radius: 16px;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 100px;
-    box-shadow: 8px 0 #808080, 4px 12px #808080, 5px -6px #808080, 6px 16px black;
+    box-shadow: 8px 0 #808080, 4px 12px #808080, 5px -6px #808080, 6px 16px black, 16px 36px 36px black;
     font-family: "Gameboy";
+}
+
+.default_gradient {
+   background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); 
+}
+
+.losing_gradient {
+ background: rgb(180,58,58);
+background: linear-gradient(90deg, rgba(180,58,58,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);     
+}
+
+.winning_gradient {
+ background: rgb(34,193,195);
+background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(148,190,117,1) 51%, rgba(253,187,45,1) 100%);     
 }
 
 #screen {
@@ -48,6 +64,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 32px;
+}
+
+.screen__main_final {
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: purple;
 }
 
 #screen__text {
