@@ -1,5 +1,12 @@
 const choices = ["rock", "paper", "scissors"];
 
+const scissorBtn = document.getElementById("scissor_btn");
+const rockBtn = document.getElementById("rock_btn");
+const paperBtn = document.getElementById("paper_btn");
+
+const player = document.getElementById("player");
+const computer = document.getElementById("computer");
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -7,50 +14,104 @@ function getComputerChoice() {
   return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function getHumanChoice() {
-  return prompt("give a value");
+scissorBtn.addEventListener("click", (ev) => {
+  onBtnClick("scissors");
+});
+
+rockBtn.addEventListener("click", (ev) => {
+  onBtnClick("rock");
+});
+
+paperBtn.addEventListener("click", (ev) => {
+  onBtnClick("paper");
+});
+
+function onBtnClick(playerChoice) {
+  player.children[0].src = "./images/fist.png";
+  computer.children[0].src = "./images/fist.png";
+
+  scissorBtn.disabled = true;
+  rockBtn.disabled = true;
+  paperBtn.disabled = true;
+
+  const computerChoice = getComputerChoice();
+
+  toggleClass(player, "animated");
+  toggleClass(computer, "animated2");
+
+  setTimeout(() => {
+    toggleClass(player, "animated");
+    toggleClass(computer, "animated2");
+
+    player.children[0].src = `./images/${playerChoice}.png`;
+    computer.children[0].src = `./images/${computerChoice}.png`;
+
+    const winner = checkWinner(playerChoice, computerChoice);
+    console.log(winner);
+  }, 950);
+
+  setTimeout(() => {
+    scissorBtn.disabled = false;
+    rockBtn.disabled = false;
+    paperBtn.disabled = false;
+  }, 1000);
 }
 
-function playRound(humanChoice, computerChoice) {
-  const formated = humanChoice.toLowerCase();
-  if (formated == computerChoice) {
-    console.log("It is a tie");
-  } else if (
-    (formated == "rock" && computerChoice == "scissors") ||
-    (formated == "paper" && computerChoice == "rock") ||
-    (formated == "scissors" && computerChoice == "paper")
-  ) {
-    console.log(
-      `You win! ${formated.charAt(0).toUpperCase() + formated.slice(1)} beats ${
-        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
-      }`
-    );
-    humanScore++;
-  } else {
-    console.log(
-      `You lose! ${
-        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
-      } beats ${formated.charAt(0).toUpperCase() + formated.slice(1)}`
-    );
-    computerScore++;
-  }
+function toggleClass(element, className) {
+  element.classList.toggle(className);
 }
 
-function playGame() {
-  for (let i = 0; i < 5; i++) {
-    console.log(
-      `Round ${
-        i + 1
-      } Human Score is ${humanScore} and computer score is ${computerScore}`
-    );
-    const computerChoice = getComputerChoice();
-    // console.log("Computer choice for testing is " + computerChoice);
-    const humanChoice = getHumanChoice();
-    playRound(humanChoice, computerChoice);
-  }
-  console.log(
-    `The score is: ${humanScore} for the human and ${computerScore} for the computer`
+function checkWinner(playerChoice, computerChoice) {
+  const txt = document.getElementById("screen__text");
+  const body = document.querySelector("body");
+  body.classList.remove(
+    "default_gradient",
+    "winning_gradient",
+    "losing_gradient"
   );
+
+  if (playerChoice == computerChoice) {
+    txt.innerHTML = "It is a tie 🫤";
+    txt.style.color = "yellow";
+    body.classList.add("default_gradient");
+  } else if (
+    (playerChoice == "rock" && computerChoice == "scissors") ||
+    (playerChoice == "paper" && computerChoice == "rock") ||
+    (playerChoice == "scissors" && computerChoice == "paper")
+  ) {
+    humanScore++;
+    txt.innerHTML = "You won 🥳";
+    txt.style.color = "limegreen";
+    body.classList.add("winning_gradient");
+  } else {
+    computerScore++;
+    txt.innerHTML = "Computer won 😤";
+    txt.style.color = "red";
+    body.classList.add("losing_gradient");
+  }
+  changeScore();
+  checkEnd();
 }
 
-playGame();
+function changeScore() {
+  document.getElementById("player__score").innerHTML = humanScore;
+  document.getElementById("computer__score").innerHTML = computerScore;
+}
+
+function checkEnd() {
+  if (humanScore == 5 || computerScore == 5) {
+    console.log("we have a winner");
+    confetti({
+      particleCount: 1000,
+      angle: 90,
+      spread: 180,
+      ticks: 300,
+      shapes: ["circle", "square", "star"],
+    });
+    document.getElementById("screen__main").innerHTML = "WE have a winner!";
+    document.getElementById("screen__main").classList.add("screen__main_final");
+    rockBtn.disabled = true;
+    scissorBtn.disabled = true;
+    paperBtn.disabled = true;
+  }
+}

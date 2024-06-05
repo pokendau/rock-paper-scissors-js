@@ -6,7 +6,34 @@
     <title>Rock Paper Scissors JS</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="default_gradient">
+    <div id="gameboy">
+      <div id="screen">
+        <div id="screen__main">
+          <div id="screen__text">Score 5 Points to Win 🏆</div>
+          <div id="boxes">
+            <div class="box">
+              <div id="player">
+                <img src="images/fist.png" alt="" />
+              </div>
+              <p>Player: <span id="player__score">0</span></p>
+            </div>
+            <div class="box">
+              <div id="computer">
+                <img src="images/fist.png" alt="" />
+              </div>
+              <p>Computer: <span id="computer__score">0</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="gameboy__body">
+        <button id="scissor_btn">✂️</button>
+        <button id="paper_btn">📜</button>
+        <button id="rock_btn">🪨</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,0 +1,187 @@
+@font-face {
+    font-family: "Gameboy";
+    src: url(./gameboy.ttf);
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#gameboy {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+    background-color: #b1b3ad;
+    width: 55vh;
+    height: 80vh;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 100px;
+    box-shadow: 8px 0 #808080, 4px 12px #808080, 5px -6px #808080, 6px 16px black, 16px 36px 36px black;
+    font-family: "Gameboy";
+}
+
+.default_gradient {
+   background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); 
+}
+
+.losing_gradient {
+ background: rgb(180,58,58);
+background: linear-gradient(90deg, rgba(180,58,58,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);     
+}
+
+.winning_gradient {
+ background: rgb(34,193,195);
+background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(148,190,117,1) 51%, rgba(253,187,45,1) 100%);     
+}
+
+#screen {
+    width: 70%;
+    height: 100%;
+    background-color: #888a96;
+    padding: 2rem 4rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 64px;
+}
+
+#screen__main {
+    background-color: #7da927;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: inset 0px 0px 0px 2px #5f9000;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.screen__main_final {
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    color: purple;
+}
+
+#screen__text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-top: 32px;
+}
+
+#screen__text img {
+    width: 15%;
+}
+
+#boxes {
+    display: flex;
+    justify-content: space-around;
+    gap: 24px;
+}
+
+.box {
+    width: 30%;
+    font-weight: 600;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#player, #computer {
+    filter: drop-shadow(8px 20px 12px);
+}
+
+.animated {
+    animation: move_hand 1000ms;
+}
+
+.animated2 {
+    animation: move_hand2 1000ms;
+}
+
+.box:last-child img {
+    transform: rotateY(180deg);
+}
+
+.box img {
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: 40px;
+    padding: 1.5rem 1.8rem;
+    border-radius: 1000px;
+    border: 2px solid black;
+    background: #7c0545;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9E2365;
+    transition-duration: 100ms;
+}
+
+button:disabled {
+    background: gray;
+}
+
+#gameboy__body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@keyframes move_hand {
+    0% {
+        transform: rotateZ(0deg);
+    } 
+    25% {
+        transform: rotateZ(90deg);
+    }
+    50% {
+        transform: rotateZ(0deg);
+    }
+
+    75% {
+        transform: rotateZ(90deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+@keyframes move_hand2 {
+    0% {
+        transform: rotateZ(0deg);
+    } 
+    25% {
+        transform: rotateZ(-90deg);
+    }
+    50% {
+        transform: rotateZ(0deg);
+    }
+
+    75% {
+        transform: rotateZ(-90deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
