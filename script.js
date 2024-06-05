@@ -51,9 +51,11 @@ function onBtnClick(playerChoice) {
   }, 950);
 
   setTimeout(() => {
-    scissorBtn.disabled = false;
-    rockBtn.disabled = false;
-    paperBtn.disabled = false;
+    if (computerScore != 5 && humanScore != 5) {
+      scissorBtn.disabled = false;
+      rockBtn.disabled = false;
+      paperBtn.disabled = false;
+    }
   }, 1000);
 }
 
@@ -100,15 +102,18 @@ function changeScore() {
 
 function checkEnd() {
   if (humanScore == 5 || computerScore == 5) {
-    console.log("we have a winner");
-    confetti({
-      particleCount: 1000,
-      angle: 90,
-      spread: 180,
-      ticks: 300,
-      shapes: ["circle", "square", "star"],
-    });
-    document.getElementById("screen__main").innerHTML = "WE have a winner!";
+    if (humanScore == 5) {
+      confetti({
+        particleCount: 1000,
+        angle: 90,
+        spread: 180,
+        ticks: 300,
+        shapes: ["circle", "square", "star"],
+      });
+      document.getElementById("screen__main").innerHTML = "You won 🥳";
+    } else {
+      document.getElementById("screen__main").innerHTML = "The computer won 🤖";
+    }
     document.getElementById("screen__main").classList.add("screen__main_final");
     rockBtn.disabled = true;
     scissorBtn.disabled = true;
