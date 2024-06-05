@@ -54,8 +54,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
-    margin-top: 8px;
+    font-size: 18px;
+    margin-top: 32px;
 }
 
 #screen__text img {
@@ -80,6 +80,14 @@ body {
     filter: drop-shadow(8px 20px 12px);
 }
 
+.animated {
+    animation: move_hand 1000ms;
+}
+
+.animated2 {
+    animation: move_hand2 1000ms;
+}
+
 .box:last-child img {
     transform: rotateY(180deg);
 }
@@ -97,6 +105,16 @@ button {
     border-radius: 1000px;
     border: 2px solid black;
     background: #7c0545;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9E2365;
+    transition-duration: 100ms;
+}
+
+button:disabled {
+    background: gray;
 }
 
 #gameboy__body {
@@ -107,8 +125,40 @@ button {
     align-items: center;
 }
 
-@keyframes hand_move {
+@keyframes move_hand {
     0% {
-        transform: rotateX(0deg);
+        transform: rotateZ(0deg);
+    } 
+    25% {
+        transform: rotateZ(90deg);
+    }
+    50% {
+        transform: rotateZ(0deg);
+    }
+
+    75% {
+        transform: rotateZ(90deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+@keyframes move_hand2 {
+    0% {
+        transform: rotateZ(0deg);
+    } 
+    25% {
+        transform: rotateZ(-90deg);
+    }
+    50% {
+        transform: rotateZ(0deg);
+    }
+
+    75% {
+        transform: rotateZ(-90deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
     }
 }
